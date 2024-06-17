@@ -13,7 +13,13 @@ from ..components import Manager
 
 
 # instantiate model and generator
-textgen = llm()
+textgen = llm(
+    provider="openai",
+    api_type="azure",
+    azure_endpoint="https://jeffrey-openai-eastus.openai.azure.com/",
+    api_key="26c454a33fca450894ad90cd6374c52d",
+    api_version="2024-04-01-preview",
+)
 logger = logging.getLogger("lida")
 api_docs = os.environ.get("LIDA_API_DOCS", "False") == "True"
 
