@@ -56,8 +56,8 @@ def read_dataframe(file_location: str, encoding: str = 'utf-8') -> pd.DataFrame:
     read_funcs = {
         'json': lambda: pd.read_json(file_location, orient='records', encoding=encoding),
         'csv': lambda: pd.read_csv(file_location, encoding=encoding),
-        'xls': lambda: pd.read_excel(file_location, encoding=encoding),
-        'xlsx': lambda: pd.read_excel(file_location, encoding=encoding),
+        'xls': lambda: pd.read_excel(file_location),
+        'xlsx': lambda: pd.read_excel(file_location),
         'parquet': pd.read_parquet,
         'feather': pd.read_feather,
         'tsv': lambda: pd.read_csv(file_location, sep="\t", encoding=encoding)
@@ -77,8 +77,7 @@ def read_dataframe(file_location: str, encoding: str = 'utf-8') -> pd.DataFrame:
 
     # Sample down to 4500 rows if necessary
     if len(cleaned_df) > 4500:
-        logger.info(
-            "Dataframe has more than 4500 rows. We will sample 4500 rows.")
+        logger.info("Dataframe has more than 4500 rows. We will sample 4500 rows.")
         cleaned_df = cleaned_df.sample(4500)
 
     if cleaned_df.columns.tolist() != df.columns.tolist():
